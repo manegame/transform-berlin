@@ -1,12 +1,15 @@
 <template>
   <div>
+    <ul id='menu'>
+      <li v-for='anchor in pageAnchors' :key='anchor' :data-menuanchor='anchor' class="active"><a :href="'#' + anchor ">{{anchor}}</a></li>
+    </ul>
     <no-ssr>
-      <full-page>
-        <section class="section">
-          page1
-        </section>
-        <section class="section">
-          page2
+      <full-page :options='options'>
+        <section  class="section"
+                  :id='page.slug'
+                  v-for='page in pages'
+                  :key='page.id'>
+          {{page.title.rendered}}
         </section>
       </full-page>
     </no-ssr>
@@ -17,6 +20,7 @@
 import Vue from 'vue'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
+import { mapMutations, mapGetters } from 'vuex'
 
 if (process.browser) {
   window.$ = require('jquery')
@@ -26,8 +30,24 @@ if (process.browser) {
 }
 
 export default {
+  async fetch ({ store, params }) {
+    await store.dispatch('pages/GET_PAGES')
+  },
+  asyncData(context) {
+    return {
+      options: {
+        anchors: context.store.pageAnchors,
+        navigation: true,
+        menu: '#menu'
+      }
+    }
+  },
   mixins: [fullpageMixin],
-  components: { NoSSR }
+  components: { NoSSR },
+  computed: {
+    pages () { return this.$store.state.pages.pages },
+    ...mapGetters({ pageAnchors: 'pages/pageAnchors' })
+  }
 }
 </script>
 
