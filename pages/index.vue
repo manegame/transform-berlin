@@ -1,34 +1,33 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        transform-berlin
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <div>
+    <no-ssr>
+      <full-page>
+        <section class="section">
+          page1
+        </section>
+        <section class="section">
+          page2
+        </section>
+      </full-page>
+    </no-ssr>
+  </div>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import Vue from 'vue'
+import NoSSR from 'vue-no-ssr'
+import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
+
+if (process.browser) {
+  window.$ = require('jquery')
+  require('fullpage.js')
+  const FullPage = require('vue-fullpage.js')
+  Vue.component('full-page', FullPage.default)
+}
 
 export default {
-  components: {
-    AppLogo
-  }
+  mixins: [fullpageMixin],
+  components: { NoSSR }
 }
 </script>
 
