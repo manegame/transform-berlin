@@ -9,7 +9,7 @@ export default {
   name: 'Slide',
   props: {
     single: {
-      type: Object,
+      type: [ Array, Object ],
       required: true
     }
   }

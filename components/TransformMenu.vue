@@ -23,7 +23,7 @@ export default {
   name: 'transform-menu',
   props: {
     pages: {
-      type: Object,
+      type: [ Array, Object ],
       required: true
     }
   }

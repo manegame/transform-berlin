@@ -23,7 +23,6 @@
 import Vue from 'vue'
 import Home from '~/components/Home'
 import Slide from '~/components/Slide'
-import TransformMenu from '~/components/TransformMenu'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
 import { mapMutations, mapGetters } from 'vuex'
@@ -38,10 +37,10 @@ if (process.browser) {
 
 export default {
   components: { 
-    NoSSR,
     Home,
+    NoSSR,
     Slide,
-    TransformMenu
+    TransformMenu: () => import('~/components/TransformMenu.vue')
   },
   async fetch ({ store, params }) {
     await store.dispatch('pages/GET_PAGES')
