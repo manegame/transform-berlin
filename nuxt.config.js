@@ -18,6 +18,12 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   /*
+  ** Add global style file
+  */
+  css: [
+    '~/assets/style/transitions.css'
+  ],
+  /*
   ** Build configuration
   */
   build: {

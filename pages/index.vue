@@ -8,6 +8,9 @@
         <a  :href="'#' + page.slug "
             v-html='page.title.rendered' />
       </li>
+      <li>
+        <nuxt-link to="/posts">Blog</nuxt-link>
+      </li>
     </ul>
     <no-ssr>
       <full-page  :options='options'>
@@ -15,7 +18,14 @@
                   :id='page.id'
                   v-for='page in pages'
                   :key='page.id'>
-          {{page.title.rendered}}
+          <Home v-if='page.title.rendered === "Home"' 
+                :single='page' />
+          <template v-else>
+            	<div class="slide"> Slide 1 </div>
+	            <div class="slide"> Slide 2 </div>
+	            <div class="slide"> Slide 3 </div>
+	            <div class="slide"> Slide 4 </div>
+          </template>
         </section>
       </full-page>
     </no-ssr>
@@ -27,6 +37,7 @@
 
 <script>
 import Vue from 'vue'
+import Home from '~/components/Home'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
 import { mapMutations, mapGetters } from 'vuex'
@@ -40,6 +51,10 @@ if (process.browser) {
 }
 
 export default {
+  components: { 
+    NoSSR,
+    Home
+  },
   async fetch ({ store, params }) {
     await store.dispatch('pages/GET_PAGES')
   },
@@ -50,7 +65,6 @@ export default {
         anchors: this.$store.state.pages.anchors,
         navigation: true,
         menu: '#menu',
-        sectionsColor : ['#ccc', '#fff'],
         fixedElements: '#header, .footer',
         afterLoad() {
           // 
@@ -62,12 +76,15 @@ export default {
     }
   },
   mixins: [fullpageMixin],
-  components: { NoSSR },
   computed: {
     pages () { return this.$store.state.pages.pages },
     anchors () {
       return this.$store.state.pages.anchors
     }
+  },
+  beforeDestroy() {
+    // destroy the instance of fullpage
+    $.fn.fullpage.destroy('all')
   }
 }
 </script>
@@ -80,34 +97,5 @@ export default {
   list-style: none;
   position: fixed;
   z-index: 10;
-}
-
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
