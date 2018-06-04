@@ -17,6 +17,7 @@
     "jquery": "^3.3.1",
     "node-sass": "^4.9.0",
     "nuxt": "^1.0.0",
+    "nuxt-rfg-icon": "^0.4.3",
     "sass-loader": "^7.0.2",
     "vue-fullpage.js": "^0.0.1",
     "vue-no-ssr": "^0.2.2",

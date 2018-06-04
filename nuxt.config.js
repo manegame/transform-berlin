@@ -24,6 +24,13 @@ module.exports = {
     '~/assets/style/transitions.css'
   ],
   /*
+  ** Favicon
+  */
+ modules: [
+  'nuxt-rfg-icon',
+  '@nuxtjs/manifest'
+ ],
+  /*
   ** Build configuration
   */
   build: {
