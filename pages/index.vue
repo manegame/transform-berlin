@@ -1,18 +1,27 @@
 <template>
   <div>
     <ul id='menu'>
-      <li v-for='anchor in pageAnchors' :key='anchor' :data-menuanchor='anchor' class="active"><a :href="'#' + anchor ">{{anchor}}</a></li>
+      <li v-for='page in $store.state.pages.pages' 
+          :key='page.slug' 
+          :data-menuanchor='page.slug' 
+          class="active">
+        <a  :href="'#' + page.slug "
+            v-html='page.title.rendered' />
+      </li>
     </ul>
     <no-ssr>
-      <full-page :options='options'>
+      <full-page  :options='options'>
         <section  class="section"
-                  :id='page.slug'
+                  :id='page.id'
                   v-for='page in pages'
                   :key='page.id'>
           {{page.title.rendered}}
         </section>
       </full-page>
     </no-ssr>
+    <div class='footer'>
+      footer
+    </div>
   </div>
 </template>
 
@@ -22,6 +31,7 @@ import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
 import { mapMutations, mapGetters } from 'vuex'
 
+// add fullpage
 if (process.browser) {
   window.$ = require('jquery')
   require('fullpage.js')
@@ -33,12 +43,21 @@ export default {
   async fetch ({ store, params }) {
     await store.dispatch('pages/GET_PAGES')
   },
-  asyncData(context) {
+  data() {
+    // before page render! no access to component
     return {
       options: {
-        anchors: context.store.pageAnchors,
+        anchors: this.$store.state.pages.anchors,
         navigation: true,
-        menu: '#menu'
+        menu: '#menu',
+        sectionsColor : ['#ccc', '#fff'],
+        fixedElements: '#header, .footer',
+        afterLoad() {
+          // 
+        },
+        afterRender() {
+          // 
+        }
       }
     }
   },
@@ -46,12 +65,23 @@ export default {
   components: { NoSSR },
   computed: {
     pages () { return this.$store.state.pages.pages },
-    ...mapGetters({ pageAnchors: 'pages/pageAnchors' })
+    anchors () {
+      return this.$store.state.pages.anchors
+    }
   }
 }
 </script>
 
-<style>
+<style scoped lang='scss'>
+#menu {
+  width: 100vw;
+  height: auto;
+  text-align: center;
+  list-style: none;
+  position: fixed;
+  z-index: 10;
+}
+
 .container {
   min-height: 100vh;
   display: flex;

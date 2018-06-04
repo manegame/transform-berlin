@@ -14,12 +14,7 @@ export const actions = {
 export const mutations = {
   SET_PAGES (state, data) {
     state.pages = data
-  }
-}
-
-export const getters = {
-  pageAnchors(state) {
-    return state.pages.map(page => {
+    state.anchors = data.map(page => {
       return page.slug
     })
   }
