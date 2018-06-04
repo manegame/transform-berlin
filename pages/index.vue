@@ -1,43 +1,29 @@
 <template>
   <div>
-    <ul id='menu'>
-      <li v-for='page in $store.state.pages.pages' 
-          :key='page.slug' 
-          :data-menuanchor='page.slug' 
-          class="active">
-        <a  :href="'#' + page.slug "
-            v-html='page.title.rendered' />
-      </li>
-      <li>
-        <nuxt-link to="/posts">Blog</nuxt-link>
-      </li>
-    </ul>
+    <TransformMenu :pages='$store.state.pages.pages' />
     <no-ssr>
       <full-page  :options='options'>
         <section  class="section"
                   :id='page.id'
-                  v-for='page in pages'
+                  v-for='(page, index) in pages'
                   :key='page.id'>
-          <Home v-if='page.title.rendered === "Home"' 
+          <!-- HOME -->
+          <Home v-if='index === 0'
                 :single='page' />
-          <template v-else>
-            	<div class="slide"> Slide 1 </div>
-	            <div class="slide"> Slide 2 </div>
-	            <div class="slide"> Slide 3 </div>
-	            <div class="slide"> Slide 4 </div>
-          </template>
+          <!-- NEXT PAGES -->
+          <Slide v-else 
+                :single='page' />
         </section>
       </full-page>
     </no-ssr>
-    <div class='footer'>
-      footer
-    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import Home from '~/components/Home'
+import Slide from '~/components/Slide'
+import TransformMenu from '~/components/TransformMenu'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
 import { mapMutations, mapGetters } from 'vuex'
@@ -53,7 +39,9 @@ if (process.browser) {
 export default {
   components: { 
     NoSSR,
-    Home
+    Home,
+    Slide,
+    TransformMenu
   },
   async fetch ({ store, params }) {
     await store.dispatch('pages/GET_PAGES')
@@ -64,14 +52,7 @@ export default {
       options: {
         anchors: this.$store.state.pages.anchors,
         navigation: true,
-        menu: '#menu',
-        fixedElements: '#header, .footer',
-        afterLoad() {
-          // 
-        },
-        afterRender() {
-          // 
-        }
+        menu: '#menu'
       }
     }
   },
@@ -88,14 +69,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang='scss'>
-#menu {
-  width: 100vw;
-  height: auto;
-  text-align: center;
-  list-style: none;
-  position: fixed;
-  z-index: 10;
-}
-</style>

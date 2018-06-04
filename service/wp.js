@@ -10,7 +10,7 @@ Vue.http.options.crossOrigin = true
 export default {
   getPages() {
     return new Promise((resolve, reject) => {
-      Vue.http.get(API_ROOT + 'pages').then(
+      Vue.http.get(API_ROOT + 'transform_pages').then(
         response => {
           console.log(response.body)
           resolve(response.body)
