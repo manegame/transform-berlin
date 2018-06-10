@@ -20,5 +20,17 @@ export default {
         }
       )
     })
+  },
+  getSlide(id) {
+    return new Promise((resolve, reject) => {
+      Vue.http.get(API_ROOT + 'transform_slides/' + id).then(
+        response => {
+          resolve(response.body)
+        },
+        response => {
+          reject(response)
+        }
+      )
+    })
   }
 }

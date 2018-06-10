@@ -9,12 +9,18 @@
     <div class='page__overlay'>
       <h1 class='page__overlay__title'><span class='red'>.Trans</span><span class='purple'>form</span></h1>
     </div>
+    <Tease/>
   </div>
 </template>
 
 <script>
+import Tease from '~/components/base/Tease'
+
 export default {
   name: 'Home',
+  components: {
+    Tease
+  },
   props: {
     single: {
       type: Object,

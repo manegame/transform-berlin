@@ -1,13 +1,16 @@
 import wordpress from '~/service/wp'
 
 export const state = () => ({
-  pages: []
+  pages: [],
+  slides: []
 })
 
 export const actions = {
   async GET_PAGES ({ commit }) {
-    const data = await wordpress.getPages()
-    commit('SET_PAGES', data)
+    commit('SET_PAGES', await wordpress.getPages())
+  },
+  async GET_SLIDE ({ commit }, id) {
+    commit('SET_SLIDE', await wordpress.getSlide(id))
   }
 }
 
@@ -17,5 +20,9 @@ export const mutations = {
     state.anchors = data.map(page => {
       return page.slug
     })
+  },
+  SET_SLIDE (state, data) {
+    console.log(data)
+    state.slides.push(data)
   }
 }

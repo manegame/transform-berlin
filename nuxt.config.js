@@ -21,7 +21,7 @@ module.exports = {
   ** Add global style file
   */
   css: [
-    '~/assets/style/transitions.css'
+    '~/assets/style/vendor/jquery.fullpage.min.css'
   ],
   /*
   ** Favicon

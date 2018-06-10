@@ -1,19 +1,14 @@
 <template>
   <div>
-    <TransformMenu :pages='$store.state.pages.pages' />
+    <!-- <TransformMenu :pages='$store.state.pages.pages' /> -->
     <no-ssr>
-      <full-page  :options='options'>
-        <section  class="section"
+      <full-page  :options='options'
+                  @afterLoad='fullPageLoaded'>
+        <!-- ALL SECTIONS -->
+        <Section  v-for='page in pages'
                   :id='page.id'
-                  v-for='(page, index) in pages'
-                  :key='page.id'>
-          <!-- HOME -->
-          <Home v-if='index === 0'
-                :single='page' />
-          <!-- NEXT PAGES -->
-          <Slide v-else 
-                :single='page' />
-        </section>
+                  :key='page.id'
+                  :single='page' />
       </full-page>
     </no-ssr>
   </div>
@@ -21,8 +16,7 @@
 
 <script>
 import Vue from 'vue'
-import Home from '~/components/Home'
-import Slide from '~/components/Slide'
+import Section from '~/components/Section'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
 import { mapMutations, mapGetters } from 'vuex'
@@ -36,21 +30,23 @@ if (process.browser) {
 }
 
 export default {
-  components: { 
-    Home,
+  components: {
     NoSSR,
-    Slide,
+    Section,
+    // Gets loaded after??
     TransformMenu: () => import('~/components/TransformMenu.vue')
   },
   async fetch ({ store, params }) {
     await store.dispatch('pages/GET_PAGES')
   },
   data() {
-    // before page render! no access to component
     return {
       options: {
+        afterLoad: this.fullPageLoaded,
         anchors: this.$store.state.pages.anchors,
         navigation: true,
+		    controlArrows: true,
+		    verticalCentered: true,
         menu: '#menu'
       }
     }
@@ -62,9 +58,15 @@ export default {
       return this.$store.state.pages.anchors
     }
   },
+  methods: {
+    fullPageLoaded() {
+      console.log($.fn.fullpage.options)
+    }
+  },
   beforeDestroy() {
     // destroy the instance of fullpage
     $.fn.fullpage.destroy('all')
   }
 }
 </script>
+
