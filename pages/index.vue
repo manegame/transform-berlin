@@ -1,9 +1,8 @@
 <template>
   <div>
-    <!-- <TransformMenu :pages='$store.state.pages.pages' /> -->
+    <TransformMenu :pages='$store.state.pages.pages' />
     <no-ssr>
-      <full-page  :options='options'
-                  @afterLoad='fullPageLoaded'>
+      <full-page  :options='options'>
         <!-- ALL SECTIONS -->
         <Section  v-for='page in pages'
                   :id='page.id'
@@ -19,7 +18,7 @@ import Vue from 'vue'
 import Section from '~/components/Section'
 import NoSSR from 'vue-no-ssr'
 import fullpageMixin from 'vue-fullpage.js/dist/mixin.min'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 // add fullpage
 if (process.browser) {
@@ -37,12 +36,32 @@ export default {
     TransformMenu: () => import('~/components/TransformMenu.vue')
   },
   async fetch ({ store, params }) {
+    let promises = []
+    let vm = this
+    console.log('this from fetch', this)
     await store.dispatch('pages/GET_PAGES')
+      .then(() => {
+        store.state.pages.pages.forEach(page => {
+          if (page.acf.slides) {
+            page.acf.slides.forEach(slide => {
+              promises.push(
+                store.dispatch('pages/GET_SLIDE', {
+                  id: slide.ID,
+                  parent_id: page.id
+                })
+              )
+            })
+          }
+        })
+        return Promise.all(promises)
+      }).then(() => {
+        store.dispatch('pages/SET_LOADED')
+      })
   },
   data() {
     return {
+      postsSet: false,
       options: {
-        afterLoad: this.fullPageLoaded,
         anchors: this.$store.state.pages.anchors,
         navigation: true,
 		    controlArrows: true,
@@ -53,14 +72,11 @@ export default {
   },
   mixins: [fullpageMixin],
   computed: {
-    pages () { return this.$store.state.pages.pages },
+    pages () { 
+      if (this.$store.state.pages.loaded) return this.$store.state.pages.pages
+    },
     anchors () {
       return this.$store.state.pages.anchors
-    }
-  },
-  methods: {
-    fullPageLoaded() {
-      console.log($.fn.fullpage.options)
     }
   },
   beforeDestroy() {

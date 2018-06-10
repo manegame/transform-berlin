@@ -21,11 +21,15 @@ export default {
       )
     })
   },
-  getSlide(id) {
+  getSlide(obj) {
     return new Promise((resolve, reject) => {
-      Vue.http.get(API_ROOT + 'transform_slides/' + id).then(
+      Vue.http.get(API_ROOT + 'transform_slides/' + obj.id).then(
         response => {
-          resolve(response.body)
+          // console.log(obj.parent_id)
+          resolve({
+            response: response.body, 
+            parent: obj.parent_id
+          })
         },
         response => {
           reject(response)

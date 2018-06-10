@@ -4,7 +4,7 @@
           :single='single'/>
     <Slide  v-else 
             v-for='slide in single.acf.slides'
-            :single='slide'
+            :slide='slide'
             :key='slide.id'/>
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script>
 import Home from '~/components/Home'
 import Slide from '~/components/Slide'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Section',
@@ -26,8 +26,31 @@ export default {
       required: true
     }
   },
+  computed: {
+    // filledSingle() {
+    //   return this.single.acf.slides
+    // }
+  },
+  methods: {
+    // ...mapActions({ getSlide: 'pages/GET_SLIDE' })
+  },
   mounted() {
-    console.log('mounted', this.$store.state.pages)
+    // if (this.single.acf.slides) {
+    //   this.single.acf.slides.forEach(slide => {
+    //     this.getSlide({
+    //       parent_id: this.single.id,
+    //       id: slide.ID
+    //     })
+    //   })
+    // }
+  },
+  watch: {
+    // single: { 
+    //   handler(val) {
+    //     console.log('single changed', val)
+    //   },
+    //   deep: true
+    // }
   }
 }
 </script>
