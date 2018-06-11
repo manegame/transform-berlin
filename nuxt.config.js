@@ -16,11 +16,20 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#D9222A' },
+ loading: { color: '#D9222A' },
+ /*
+ ** Loading bar indicator for --spa mode
+ */
+ loadingIndicator: {
+    name: 'chasing-dots',
+    color: '#D9222A',
+    background: 'white'
+  },
   /*
   ** Add global style file
   */
   css: [
+    '~/assets/style/transitions.css',
     '~/assets/style/vendor/jquery.fullpage.min.css'
   ],
   /*

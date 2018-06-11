@@ -32,13 +32,13 @@ export default {
 
 <style scoped lang='scss'>
 @import '~/assets/style/variables.scss';
+
 .menu {
   padding: 0;
   width: 100%;
   height: auto;
   text-align: center;
   list-style: none;
-  position: absolute;
   bottom: 20%;
   z-index: 10;
   opacity: 0;

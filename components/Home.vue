@@ -7,7 +7,10 @@
               type='video/mp4'>
     </video>
     <div class='page__overlay'>
-      <h1 class='page__overlay__title'><span class='red'>.Trans</span><span class='purple'>form</span></h1>
+      <Transform  class='page__overlay__title'
+                  :color='true'
+                  :showOn='"#home"' />
+      <TransformMenu :pages='$store.state.pages.pages' />
     </div>
     <Tease/>
   </div>
@@ -15,11 +18,15 @@
 
 <script>
 import Tease from '~/components/base/Tease'
+import Transform from '~/components/base/Transform'
+import TransformMenu from '~/components/TransformMenu'
 
 export default {
   name: 'Home',
   components: {
-    Tease
+    Tease,
+    Transform,
+    TransformMenu
   },
   props: {
     single: {
@@ -32,6 +39,7 @@ export default {
 
 <style scoped lang='scss'>
 @import '~/assets/style/variables.scss';
+@import '~/assets/style/helpers/mixins.scss';
 @import '~/assets/style/vendor/fullPageVideo.scss';
 
 .page {
@@ -40,18 +48,11 @@ export default {
 
   &__overlay {
     &__title {
-      font-size: $font-size-l;
-      line-height: $line-height-l;
+      height: 45vh;
       text-align: center;
+
+      @include no-select;
     }
   }
-}
-
-.red {
-  color: $red;
-}
-
-.purple {
-  color: $purple;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <TransformMenu :pages='$store.state.pages.pages' />
+  <div class='index'>
+    <div class='index__background' />
     <no-ssr>
       <full-page  :options='options'>
         <!-- ALL SECTIONS -->
@@ -31,9 +31,7 @@ if (process.browser) {
 export default {
   components: {
     NoSSR,
-    Section,
-    // Gets loaded after??
-    TransformMenu: () => import('~/components/TransformMenu.vue')
+    Section
   },
   async fetch ({ store, params }) {
     let promises = []
@@ -60,10 +58,9 @@ export default {
   },
   data() {
     return {
-      postsSet: false,
       options: {
         anchors: this.$store.state.pages.anchors,
-        navigation: true,
+        slidesNavigation: true,
 		    controlArrows: true,
 		    verticalCentered: true,
         menu: '#menu'
@@ -85,4 +82,53 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.index {
+  &__background {
+    position: fixed;
+    top: -25vmax;
+    left: -25vmax;
+    right: 0;
+    z-index: -1;
+    display: block;
+    width: 150vmax;
+    height: 150vmax;
+
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+
+    &:before {
+      content: "";
+      display: block;
+      opacity: 0.15;
+      width: 50%;
+      height: 50%;
+      background-color: white;
+      background-image: url('~/assets/style/icon/logo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    animation: rotation 120s linear infinite;
+    -webkit-animation: rotation 120s linear infinite;
+    -moz-animation: rotation 120s linear infinite;
+  }
+
+  @keyframes rotation {
+    from { transform: rotate(0deg) }
+    to { transform: rotate(360deg) }
+  }
+
+  @keyframes animatedBackground {
+	  0% { background-position: -50% 0; }
+	  50% { background-position: 150% 0; }
+	  100% { background-position: 50% 0; }
+  }
+}
+</style>
 

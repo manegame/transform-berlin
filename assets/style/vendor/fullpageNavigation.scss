@@ -1,14 +1,29 @@
-.fp-controlArrow.fp-prev {
-  left: 0;
-  border: $red-border;
-  width: 50px;
-  height: 101px;
-  cursor: pointer;
+.fp-controlArrow {
+  &.fp-next {
+    border-width: 38.5px 0 38.5px 26px;
+    border-color: transparent transparent transparent $red;
+  }
+
+  &.fp-prev {
+    border-width: 38.5px 26px 38.5px 0;
+    border-color: transparent $red transparent transparent;
+  }
 }
-.fp-controlArrow.fp-next {
-  right: 0;
-  border: $red-border;
-  width: 50px;
-  height: 101px;
-  cursor: pointer;
+
+.fp-slidesNav {
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    li a span {
+      background: $red;
+    }
+
+    li a.active span {
+      width: 10px;
+      height: 10px;
+      margin: -5px 0 0 -5px;
+    }
+  }
 }

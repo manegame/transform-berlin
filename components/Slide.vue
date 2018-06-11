@@ -15,14 +15,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  watch: {
-    slide: {
-      handler(val) {
-        console.log('slide changed', val)
-      },
-      deep: true
-    }
   }
 }
 </script>
