@@ -95,12 +95,6 @@ export default {
     width: 150vmax;
     height: 150vmax;
 
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
-
     &:before {
       content: "";
       display: block;
@@ -120,8 +114,16 @@ export default {
   }
 
   @keyframes rotation {
-    from { transform: rotate(0deg) }
-    to { transform: rotate(360deg) }
+    from { 
+      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+    }
+    to { 
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+    }
   }
 
   @keyframes animatedBackground {

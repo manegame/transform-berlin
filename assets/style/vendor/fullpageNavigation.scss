@@ -1,12 +1,24 @@
 .fp-controlArrow {
+  transition: all .2s ease-out;
+
   &.fp-next {
     border-width: 38.5px 0 38.5px 26px;
-    border-color: transparent transparent transparent $red;
+    border-color: transparent transparent transparent $red-low;
+
+    &:hover {
+      border-width: 42.5px 6px 42.5px 26px;
+      border-color: transparent transparent transparent $red;
+    }
   }
 
   &.fp-prev {
     border-width: 38.5px 26px 38.5px 0;
-    border-color: transparent $red transparent transparent;
+    border-color: transparent $red-low transparent transparent;
+
+    &:hover {
+      border-width: 42.5px 32px 42.5px 6px;
+      border-color: transparent $red transparent transparent;
+    }
   }
 }
 

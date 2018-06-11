@@ -1,11 +1,14 @@
 <template>
   <div class='tease'>
-    <h1><span class='red'>.Dia</span><span class='purple'>log</span></h1>
-    <div class="tease__wave">
-      <span class="tease__wave__dot"></span>
-      <span class="tease__wave__dot"></span>
-      <span class="tease__wave__dot"></span>
-    </div>
+    <a  href='#dialog'
+        class='tease__link' >
+      <h1 class='tease__link--title'><span class='red'>.Dia</span><span class='purple'>log #14</span></h1>
+      <div class="tease__wave">
+        <span class="tease__wave__dot"></span>
+        <span class="tease__wave__dot"></span>
+        <span class="tease__wave__dot"></span>
+      </div>
+    </a>
   </div>
 </template>
 
@@ -21,17 +24,23 @@ export default {
 .tease {
   width: 160px;
   position:absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 3em;
+  right: 1em;
   z-index: 9;
   text-align: center;
   margin-right: $margin-hor;
   margin-bottom: $margin-ver;
 
+  &__link {
+    &--title {
+      padding-bottom: $margin-hor;
+    }
+  }
+
   &__wave {
     width: 100%;
     height: auto;
-    padding: 20px 10px 20px;
+    padding: 6px 10px 20px;
     border-radius: 40px;
     background: white;
     border: $red-border;
@@ -44,7 +53,7 @@ export default {
       margin-right:8px;
       margin-left:8px;
       background: $red;
-      animation: wave 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      animation: wave 1.2s ease-in infinite;
   
       &:nth-child(2) {
         animation-delay: -0.8s;
@@ -67,16 +76,16 @@ export default {
 		-moz-transform: initial;
 	}
 
-	30% {
-		transform: translateY(-6px) scale(1.5);
-		-webkit-transform: translateY(-6px) scale(1.5);
-		-moz-transform: translateY(-6px) scale(1.5);
+	33% {
+		transform: translateY(-3px) scale(1.5);
+		-webkit-transform: translateY(-3px) scale(1.5);
+		-moz-transform: translateY(-3px) scale(1.5);
 	}
 
-	60% {
-		transform: translateY(6px) scale(1.5);
-		-webkit-transform: translateY(6px) scale(1.5);
-		-moz-transform: translateY(6px) scale(1.5);
+	66% {
+		transform: translateY(12px) scale(1);
+		-webkit-transform: translateY(12px) scale(1);
+		-moz-transform: translateY(12px) scale(1);
 	}
 }
 

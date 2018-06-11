@@ -4,7 +4,7 @@
       id='menu'>
     <!-- SLIDES -->
     <li v-for='(page, index) in pages' 
-        v-if='index !== 0'
+        v-if='index !== 0 && index !== pages.length - 1'
         :key='page.slug' 
         :data-menuanchor='page.slug'
         class='menu__item'>
@@ -12,9 +12,9 @@
           v-html='page.title.rendered' />
     </li>
     <!-- EXTRA -->
-    <li class='menu__item'>
+    <!-- <li class='menu__item'>
       <nuxt-link to="/posts">Blag</nuxt-link>
-    </li>
+    </li> -->
   </ul>
 </template>
 
@@ -41,7 +41,6 @@ export default {
   list-style: none;
   bottom: 20%;
   z-index: 10;
-  opacity: 0;
   transition: all .3s;
 
   &__item {
