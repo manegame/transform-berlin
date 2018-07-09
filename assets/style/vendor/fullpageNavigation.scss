@@ -3,21 +3,19 @@
 
   &.fp-next {
     border-width: 38.5px 0 38.5px 26px;
-    border-color: transparent transparent transparent $red-low;
+    border-color: transparent transparent transparent $silver;
 
     &:hover {
-      border-width: 42.5px 6px 42.5px 26px;
-      border-color: transparent transparent transparent $red;
+      border-color: transparent transparent transparent $red-low;
     }
   }
 
   &.fp-prev {
     border-width: 38.5px 26px 38.5px 0;
-    border-color: transparent $red-low transparent transparent;
+    border-color: transparent $silver transparent transparent;
 
     &:hover {
-      border-width: 42.5px 32px 42.5px 6px;
-      border-color: transparent $red transparent transparent;
+      border-color: transparent $red-low transparent transparent;
     }
   }
 }
@@ -29,10 +27,12 @@
     justify-content: center;
 
     li a span {
-      background: $red;
+      background: $silver;
     }
 
-    li a.active span {
+    li a.active span,
+    li a span:hover {
+      background: $red-low;
       width: 10px;
       height: 10px;
       margin: -5px 0 0 -5px;

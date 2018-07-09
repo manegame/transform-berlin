@@ -62,7 +62,7 @@ export default {
         anchors: this.$store.state.pages.anchors,
         slidesNavigation: true,
 		    controlArrows: true,
-		    verticalCentered: true,
+		    verticalCentered: false,
         menu: '#menu'
       }
     }

@@ -37,8 +37,12 @@ module.exports = {
   */
  modules: [
   'nuxt-rfg-icon',
-  '@nuxtjs/manifest'
+  '@nuxtjs/manifest',
+  ['@nuxtjs/google-analytics']
  ],
+ 'google-analytics': {
+    id: 'UA-69252921-5'
+ },
   /*
   ** Build configuration
   */
