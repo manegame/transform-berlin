@@ -114,22 +114,21 @@ export default {
   }
 
   @keyframes rotation {
-    from { 
+    0% { 
       transform: rotate(0deg);
       -webkit-transform: rotate(0deg);
       -moz-transform: rotate(0deg);
     }
-    to { 
+    50% { 
       transform: rotate(360deg);
       -webkit-transform: rotate(360deg);
       -moz-transform: rotate(360deg);
     }
-  }
-
-  @keyframes animatedBackground {
-	  0% { background-position: -50% 0; }
-	  50% { background-position: 150% 0; }
-	  100% { background-position: 50% 0; }
+    100% { 
+      transform: rotate(-360deg);
+      -webkit-transform: rotate(-360deg);
+      -moz-transform: rotate(-360deg);
+    }
   }
 }
 </style>

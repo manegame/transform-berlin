@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
 @import '~/assets/style/variables.scss';
 
 html {
-  font-family: "Roboto Slab",  Roboto, serif;
+  font-family: $roboto-slab;
   font-size: 16px;
   background: $bg;
   word-spacing: 1px;

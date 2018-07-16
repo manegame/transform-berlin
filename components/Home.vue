@@ -14,11 +14,12 @@
                     :color='true'
                     :showOn='"#home"' />
       </transition>
-      <transition name='fade'>
-        <TransformMenu  v-if='reveal'
-                        :pages='$store.state.pages.pages' />
-      </transition>
     </div>
+    <transition name='fade'>
+      <TransformMenu  v-if='reveal'
+                      @close='toggleMenu'
+                      :pages='$store.state.pages.pages' />
+    </transition>
     <transition name='slide'>
       <Tease v-if='reveal'/>
     </transition>
@@ -53,6 +54,9 @@ export default {
       window.setTimeout(() => {
         this.reveal = true
       }, 9000)
+    },
+    toggleMenu() {
+      this.reveal = !this.reveal
     }
   }
 }

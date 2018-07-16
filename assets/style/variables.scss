@@ -3,11 +3,26 @@ $red-low: rgba(217, 34, 43, 0.285);
 $purple: #341C31;
 $cruella: #4d0542;
 $silver: rgba(225, 225, 225, 0.483);
+$haze: rgba(225, 225, 225, 0.8);
 $bg: #fff;
 // DECO
 $red-border: 2px solid $red;
+$font-size: 16px;
+$line-height: 20px;
 // SIZES
 $font-size-l: 3em;
 $line-height-l: 3em;
 $margin-hor: 20px;
 $margin-ver: 24px;
+// FONTS
+$roboto-slab: "Roboto Slab", "Roboto", serif;
+$roboto: "Roboto", sans-serif;
+// BREAKPOINTS
+$breakpoints: (
+  'small': (max-width: 800px),
+  'medium': (max-width: 1280px),
+  'large': (max-width: 1600px),
+  'short': (max-height: 700px),
+  'tall': (min-height: 800px)
+);
+
